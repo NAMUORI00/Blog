@@ -230,8 +230,14 @@ websiteIconElement = document.getElementById('website-icon')
 if (style == 'light') {
   if (githubIconElement) githubIconElement.setAttribute('fill', '#24292e')
   if (twitterIconElement) twitterIconElement.setAttribute('fill', 'black')
-  if (emailIconElement) emailIconElement.setAttribute('fill', '#24292e')
-  if (websiteIconElement) websiteIconElement.setAttribute('fill', '#24292e')
+  if (emailIconElement) {
+    emailIconElement.removeAttribute('color')
+    emailIconElement.removeAttribute('class')
+  }
+  if (websiteIconElement) {
+    websiteIconElement.removeAttribute('color')
+    websiteIconElement.removeAttribute('class')
+  }
 }
 else {
   if (githubIconElement) {
@@ -241,12 +247,10 @@ else {
   }
   if (twitterIconElement) twitterIconElement.setAttribute('fill', 'white')
   if (emailIconElement) {
-    emailIconElement.removeAttribute('fill')
     emailIconElement.setAttribute('class', 'octicon')
     emailIconElement.setAttribute('color', '#f0f6fc')
   }
   if (websiteIconElement) {
-    websiteIconElement.removeAttribute('fill')
     websiteIconElement.setAttribute('class', 'octicon')
     websiteIconElement.setAttribute('color', '#f0f6fc')
   }

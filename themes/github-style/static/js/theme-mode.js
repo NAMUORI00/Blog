@@ -46,9 +46,7 @@ function setIconTheme(theme) {
     if (theme === 'light') {
       emailIconElement.removeAttribute('color')
       emailIconElement.removeAttribute('class')
-      emailIconElement.setAttribute('fill', '#24292e')
     } else if (theme === 'dark') {
-      emailIconElement.removeAttribute('fill')
       emailIconElement.setAttribute('class', 'octicon')
       emailIconElement.setAttribute('color', '#f0f6fc')
     }
@@ -58,9 +56,7 @@ function setIconTheme(theme) {
     if (theme === 'light') {
       websiteIconElement.removeAttribute('color')
       websiteIconElement.removeAttribute('class')
-      websiteIconElement.setAttribute('fill', '#24292e')
     } else if (theme === 'dark') {
-      websiteIconElement.removeAttribute('fill')
       websiteIconElement.setAttribute('class', 'octicon')
       websiteIconElement.setAttribute('color', '#f0f6fc')
     }
