@@ -1,6 +1,45 @@
 {{ if .Site.Params.enableGitalk }}
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<style>
+.gitalk-container {
+  max-width: 840px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+.gt-container {
+  font-size: 14px;
+}
+
+.gt-header-textarea {
+  min-height: 120px !important;
+  max-height: 300px !important;
+  font-size: 14px;
+}
+
+.gt-header-comment {
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+}
+
+.gt-comment-content {
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+}
+
+.gt-btn {
+  font-size: 12px;
+  padding: 6px 16px;
+}
+
+@media (max-width: 768px) {
+  .gitalk-container {
+    margin: 10px auto;
+    padding: 0 8px;
+  }
+}
+</style>
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 <script>
   const gitalk = new Gitalk({
