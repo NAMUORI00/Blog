@@ -161,11 +161,17 @@
           {{ end }}
 
           {{ if .Site.Params.links }}
-          {{ range $index, $link := .Site.Params.links }}
+          {{ range .Site.Params.links }}
           {{ if .icon }}
           <a style="margin: 0 10px 10px 0;" href="{{ .href }}">
             {{ if hasSuffix .icon ".svg" }}
-            <img alt="@{{ .title }}" width="32" height="32" src="{{ .icon }}" class="avatar custom-link-icon" data-link-index="{{ $index }}">
+            <svg id="{{ lower .title }}-icon" viewBox="0 0 16 16" version="1.1" width="32" height="32" fill="#24292e">
+              {{ if hasSuffix .icon "email-icon.svg" }}
+              <path fill-rule="evenodd" d="M1.75 2A1.75 1.75 0 000 3.75v.736a.75.75 0 000 .027v7.737C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0016 12.25v-8.5A1.75 1.75 0 0014.25 2H1.75zM14.5 4.07v-.32a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.32L8 7.88l6.5-3.81zm-13 1.74v6.441c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.809L8.38 9.397a.75.75 0 01-.76 0L1.5 5.809z"/>
+              {{ else if hasSuffix .icon "website-icon.svg" }}
+              <path fill-rule="evenodd" d="M1.543 7.25h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.506 6.506 0 00-4.666 5.5zm2.733 1.5H1.543a6.506 6.506 0 004.666 5.5 11.13 11.13 0 01-.352-.552c-.715-1.192-1.437-2.874-1.581-4.948zm1.504 0h4.44a9.637 9.637 0 01-1.363 4.177c-.306.51-.612.919-.857 1.215a9.978 9.978 0 01-.857-1.215A9.637 9.637 0 015.78 8.75zm4.44-1.5H5.78a9.637 9.637 0 011.363-4.177c.306-.51.612-.919.857-1.215.245.296.55.705.857 1.215A9.638 9.638 0 0110.22 7.25zm1.504 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.506 6.506 0 004.666-5.5h-2.733zm2.733-1.5h-2.733c-.144-2.074-.866-3.756-1.58-4.948a11.738 11.738 0 00-.353-.552 6.506 6.506 0 014.666 5.5zM8 0a8 8 0 100 16A8 8 0 008 0z"/>
+              {{ end }}
+            </svg>
             {{ else }}
             <img alt="@{{ .title }}" width="32" height="32" src="{{ .icon }}" class="avatar">
             {{ end }}
@@ -217,9 +223,14 @@ window.onscroll = function (e) {
 var style = localStorage.getItem('data-color-mode')
 githubIconElement = document.getElementById('github-icon')
 twitterIconElement = document.getElementById('twitter-icon')
+emailIconElement = document.getElementById('email-icon')
+websiteIconElement = document.getElementById('website-icon')
+
 if (style == 'light') {
   if (githubIconElement) githubIconElement.setAttribute('fill', '#24292e')
   if (twitterIconElement) twitterIconElement.setAttribute('fill', 'black')
+  if (emailIconElement) emailIconElement.setAttribute('fill', '#24292e')
+  if (websiteIconElement) websiteIconElement.setAttribute('fill', '#24292e')
 }
 else {
   if (githubIconElement) {
@@ -227,6 +238,16 @@ else {
     githubIconElement.setAttribute('class', 'octicon')
     githubIconElement.setAttribute('color', '#f0f6fc')
   }
-  if (twitterIconElement)  twitterIconElement.setAttribute('fill', 'white') 
+  if (twitterIconElement) twitterIconElement.setAttribute('fill', 'white')
+  if (emailIconElement) {
+    emailIconElement.removeAttribute('fill')
+    emailIconElement.setAttribute('class', 'octicon')
+    emailIconElement.setAttribute('color', '#f0f6fc')
+  }
+  if (websiteIconElement) {
+    websiteIconElement.removeAttribute('fill')
+    websiteIconElement.setAttribute('class', 'octicon')
+    websiteIconElement.setAttribute('color', '#f0f6fc')
+  }
 }
 </script>

@@ -15,8 +15,6 @@ pygmentsUseClasses = true
   headerIcon = "/images/github-mark.svg"
   avatar = "https://avatars.githubusercontent.com/u/46620366"
   favicon = "/images/favicon.svg"
-  
-  custom_css = ["css/custom-icons.css"]
 
   [[params.links]]
     title = "Email"
