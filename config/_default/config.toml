@@ -16,14 +16,14 @@ pygmentsUseClasses = true
   avatar = "https://avatars.githubusercontent.com/u/46620366"
 
   [[params.links]]
-    title = "My-Organization"
-    href = "https://github.com/my-org"
-    icon = "https://via.placeholder.com/32" # 조직의 로고 이미지 URL
+    title = "Email"
+    href = "mailto:admin@namuori.net"
+    icon = "/images/email-icon.png"
 
   [[params.links]]
-    title = "Another-Org"
-    href = "https://github.com/another-org"
-    icon = "/images/another-org-icon.png" # static/images/ 에 위치한 아이콘
+    title = "Website"
+    href = "https://namuori.net"
+    icon = "/images/website-icon.png"
 
 # Hugo Mounts Configuration
 [[module.mounts]]
