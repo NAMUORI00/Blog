@@ -220,7 +220,8 @@ window.onscroll = function (e) {
   }
 };
 
-var style = localStorage.getItem('data-color-mode')
+// 현재 적용된 테마를 정확히 가져오기
+var style = document.documentElement.getAttribute('data-color-mode') || 'light'
 githubIconElement = document.getElementById('github-icon')
 twitterIconElement = document.getElementById('twitter-icon')
 emailIconElement = document.getElementById('email-icon')
