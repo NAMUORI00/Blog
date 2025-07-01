@@ -246,36 +246,4 @@ else {
     websiteIconElement.setAttribute('fill', '#f0f6fc')
   }
 }
-
-// 다크모드 토글 시에도 아이콘 색상 변경
-function updateIconColors() {
-  var currentStyle = localStorage.getItem('data-color-mode') || 'light'
-  var emailIcon = document.getElementById('email-icon')
-  var websiteIcon = document.getElementById('website-icon')
-  
-  if (currentStyle == 'light') {
-    if (emailIcon) emailIcon.setAttribute('fill', '#24292e')
-    if (websiteIcon) websiteIcon.setAttribute('fill', '#24292e')
-  } else {
-    if (emailIcon) emailIcon.setAttribute('fill', '#f0f6fc')
-    if (websiteIcon) websiteIcon.setAttribute('fill', '#f0f6fc')
-  }
-}
-
-// MutationObserver로 다크모드 변경 감지
-var observer = new MutationObserver(function(mutations) {
-  mutations.forEach(function(mutation) {
-    if (mutation.attributeName === 'data-color-mode') {
-      updateIconColors()
-    }
-  })
-})
-
-// body 요소의 data-color-mode 속성 변경 감지
-if (document.body) {
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ['data-color-mode']
-  })
-}
 </script>

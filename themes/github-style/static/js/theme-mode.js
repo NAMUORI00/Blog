@@ -21,6 +21,9 @@ function setTheme(style) {
 function setIconTheme(theme) {
   const twitterIconElement = document.getElementById('twitter-icon')
   const githubIconElement = document.getElementById('github-icon')
+  const emailIconElement = document.getElementById('email-icon')
+  const websiteIconElement = document.getElementById('website-icon')
+  
   if (twitterIconElement) {
     if (theme === 'light') {
       twitterIconElement.setAttribute("fill", "black")
@@ -38,6 +41,22 @@ function setIconTheme(theme) {
       githubIconElement.setAttribute('color', '#f0f6fc')
     }
   }
+
+  if (emailIconElement) {
+    if (theme === 'light') {
+      emailIconElement.setAttribute('fill', '#24292e')
+    } else if (theme === 'dark') {
+      emailIconElement.setAttribute('fill', '#f0f6fc')
+    }
+  }
+
+  if (websiteIconElement) {
+    if (theme === 'light') {
+      websiteIconElement.setAttribute('fill', '#24292e')
+    } else if (theme === 'dark') {
+      websiteIconElement.setAttribute('fill', '#f0f6fc')
+    }
+  }
 }
 
 function currentTheme() {
@@ -47,5 +66,7 @@ function currentTheme() {
 }
 
 (() => {
-  setTheme(currentTheme());
+  const theme = currentTheme();
+  setTheme(theme);
+  setIconTheme(theme);
 })();
