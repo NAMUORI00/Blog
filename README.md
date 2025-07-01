@@ -6,6 +6,18 @@
 
 기술적인 내용, 개인적인 생각, 학습 과정 등을 기록하고 공유하는 공간입니다.
 
+## 사용된 기술
+
+### Hugo Theme
+이 블로그는 [github-style](https://github.com/MeiK2333/github-style) Hugo 테마를 사용합니다.
+
+**Theme Attribution:**
+- **Original Theme:** [github-style](https://github.com/MeiK2333/github-style) by [MeiK2333](https://github.com/MeiK2333)
+- **License:** MIT License
+- **Modifications:** This repository includes a customized version of the theme for personal use
+
+The original theme is licensed under the MIT License. Copyright (c) 2019 MeiK2333. We maintain this attribution as required by the license terms.
+
 ### 관련 링크
 
 -   **블로그:** [https://namuori00.github.io](https://namuori00.github.io)
