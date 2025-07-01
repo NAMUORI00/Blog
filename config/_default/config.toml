@@ -12,7 +12,7 @@ pygmentsUseClasses = true
   github = "NAMUORI00"
   Description = "I love github fork"
 
-  headerIcon = "https://raw.githubusercontent.com/NAMUORI00/Blog/main/static/images/github-icon.svg"
+  headerIcon = "/images/github-mark.svg"
   avatar = "https://avatars.githubusercontent.com/u/46620366"
 
   [[params.links]]
@@ -24,6 +24,12 @@ pygmentsUseClasses = true
     title = "Website"
     href = "https://namuori.net"
     icon = "/images/website-icon.png"
+
+# Sitemap Configuration
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
 
 # Hugo Mounts Configuration
 [[module.mounts]]
