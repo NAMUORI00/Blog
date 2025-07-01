@@ -21,7 +21,7 @@ pygmentsUseClasses = true
 
   [params.gitalk]
     clientID = "Ov23liQgziUtzQ2mD72A"  # GitHub OAuth App에서 받은 Client ID로 교체하세요
-    clientSecret = "3e352ec30f7c6151f1770788253577ffbd7ee70e "  # GitHub OAuth App에서 받은 Client Secret으로 교체하세요
+    clientSecret = "3e352ec30f7c6151f1770788253577ffbd7ee70e"  # GitHub OAuth App에서 받은 Client Secret으로 교체하세요
     repo = "Blog-comment"  # 댓글을 저장할 GitHub 리포지토리 이름
     owner = "NAMUORI00"  # GitHub 사용자명
     admin = "NAMUORI00"  # 관리자 GitHub 사용자명 (이슈 생성 권한)
