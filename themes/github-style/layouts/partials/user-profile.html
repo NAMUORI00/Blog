@@ -241,10 +241,14 @@ else {
   }
   if (twitterIconElement) twitterIconElement.setAttribute('fill', 'white')
   if (emailIconElement) {
-    emailIconElement.setAttribute('fill', '#f0f6fc')
+    emailIconElement.removeAttribute('fill')
+    emailIconElement.setAttribute('class', 'octicon')
+    emailIconElement.setAttribute('color', '#f0f6fc')
   }
   if (websiteIconElement) {
-    websiteIconElement.setAttribute('fill', '#f0f6fc')
+    websiteIconElement.removeAttribute('fill')
+    websiteIconElement.setAttribute('class', 'octicon')
+    websiteIconElement.setAttribute('color', '#f0f6fc')
   }
 }
 </script>
