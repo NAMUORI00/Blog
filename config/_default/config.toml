@@ -15,6 +15,22 @@ pygmentsUseClasses = true
   headerIcon = "/images/github-mark.svg"
   avatar = "https://avatars.githubusercontent.com/u/46620366"
   favicon = "/images/favicon.svg"
+  
+  # Enable Gitalk comments
+  enableGitalk = true
+
+  [params.gitalk]
+    clientID = "Ov23liQgziUtzQ2mD72A"  # GitHub OAuth App에서 받은 Client ID로 교체하세요
+    clientSecret = "3e352ec30f7c6151f1770788253577ffbd7ee70e "  # GitHub OAuth App에서 받은 Client Secret으로 교체하세요
+    repo = "Blog-comment"  # 댓글을 저장할 GitHub 리포지토리 이름
+    owner = "NAMUORI00"  # GitHub 사용자명
+    admin = "NAMUORI00"  # 관리자 GitHub 사용자명 (이슈 생성 권한)
+    id = "location.pathname"  # 각 페이지의 고유 식별자
+    labels = "gitalk"  # GitHub 이슈에 자동으로 붙을 라벨
+    perPage = 15  # 페이지당 댓글 수
+    pagerDirection = "last"  # 댓글 정렬 방향
+    createIssueManually = true  # 관리자가 수동으로 이슈 생성
+    distractionFreeMode = false  # 집중 모드 비활성화
 
   [[params.links]]
     title = "Email"
