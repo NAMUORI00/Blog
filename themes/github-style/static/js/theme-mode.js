@@ -43,19 +43,25 @@ function setIconTheme(theme) {
   }
 
   if (emailIconElement) {
+    console.log('Email icon found, applying theme:', theme)
     if (theme === 'light') {
       emailIconElement.setAttribute('fill', '#24292e')
     } else if (theme === 'dark') {
       emailIconElement.setAttribute('fill', '#f0f6fc')
     }
+  } else {
+    console.log('Email icon not found')
   }
 
   if (websiteIconElement) {
+    console.log('Website icon found, applying theme:', theme)
     if (theme === 'light') {
       websiteIconElement.setAttribute('fill', '#24292e')
     } else if (theme === 'dark') {
       websiteIconElement.setAttribute('fill', '#f0f6fc')
     }
+  } else {
+    console.log('Website icon not found')
   }
 }
 
