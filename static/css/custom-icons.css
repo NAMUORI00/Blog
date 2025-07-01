@@ -1,0 +1,17 @@
+/* Custom link icons dark mode support */
+[data-color-mode="light"] .custom-link-icon {
+  filter: none;
+}
+
+[data-color-mode="dark"] .custom-link-icon {
+  filter: invert(1) opacity(0.8);
+}
+
+/* Ensure SVG icons use currentColor in Organizations section */
+.avatar[src$=".svg"] {
+  filter: none;
+}
+
+[data-color-mode="dark"] .avatar[src$=".svg"] {
+  filter: invert(1) opacity(0.8);
+}

@@ -161,10 +161,14 @@
           {{ end }}
 
           {{ if .Site.Params.links }}
-          {{ range .Site.Params.links }}
+          {{ range $index, $link := .Site.Params.links }}
           {{ if .icon }}
           <a style="margin: 0 10px 10px 0;" href="{{ .href }}">
+            {{ if hasSuffix .icon ".svg" }}
+            <img alt="@{{ .title }}" width="32" height="32" src="{{ .icon }}" class="avatar custom-link-icon" data-link-index="{{ $index }}">
+            {{ else }}
             <img alt="@{{ .title }}" width="32" height="32" src="{{ .icon }}" class="avatar">
+            {{ end }}
           </a>
           {{ else }}
           <a style="margin: 0 10px 10px 0;" href="{{ .href }}">

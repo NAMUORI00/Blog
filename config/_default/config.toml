@@ -14,16 +14,19 @@ pygmentsUseClasses = true
 
   headerIcon = "/images/github-mark.svg"
   avatar = "https://avatars.githubusercontent.com/u/46620366"
+  favicon = "/images/favicon.svg"
+  
+  custom_css = ["css/custom-icons.css"]
 
   [[params.links]]
     title = "Email"
     href = "mailto:admin@namuori.net"
-    icon = "/images/email-icon.png"
+    icon = "/images/email-icon.svg"
 
   [[params.links]]
     title = "Website"
     href = "https://namuori.net"
-    icon = "/images/website-icon.png"
+    icon = "/images/website-icon.svg"
 
 # Sitemap Configuration
 [sitemap]
