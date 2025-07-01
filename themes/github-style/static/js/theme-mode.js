@@ -44,21 +44,17 @@ function setIconTheme(theme) {
 
   if (emailIconElement) {
     if (theme === 'light') {
-      emailIconElement.removeAttribute('color')
-      emailIconElement.removeAttribute('class')
+      emailIconElement.setAttribute('fill', '#24292e')
     } else if (theme === 'dark') {
-      emailIconElement.setAttribute('class', 'octicon')
-      emailIconElement.setAttribute('color', '#f0f6fc')
+      emailIconElement.setAttribute('fill', '#f0f6fc')
     }
   }
 
   if (websiteIconElement) {
     if (theme === 'light') {
-      websiteIconElement.removeAttribute('color')
-      websiteIconElement.removeAttribute('class')
+      websiteIconElement.setAttribute('fill', '#24292e')
     } else if (theme === 'dark') {
-      websiteIconElement.setAttribute('class', 'octicon')
-      websiteIconElement.setAttribute('color', '#f0f6fc')
+      websiteIconElement.setAttribute('fill', '#f0f6fc')
     }
   }
 }
