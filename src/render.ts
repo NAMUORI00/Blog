@@ -169,8 +169,7 @@ export async function savePage(
   // otherwise update the page
   console.info(`[Info] Updating ${postpath}`);
 
-  const { title, pageString } = await renderPage(page, notion);
-  const fileName = getFileName(title, page.id);
-  await sh(`hugo new "${mount.target_folder}/${fileName}"`, false);
-  fs.writeFileSync(`content/${mount.target_folder}/${fileName}`, pageString);
+  const { pageString } = await renderPage(page, notion);
+  fs.ensureDirSync(path.dirname(postpath));
+  fs.writeFileSync(postpath, pageString);
 }
