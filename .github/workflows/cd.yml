@@ -21,15 +21,15 @@ defaults:
     shell: bash
 
 env:
-  NODE_VERSION: 23.x
+  NODE_VERSION: 22.x
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    # env:
-    #   CLOUDFLARE_PAGES_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+    env:
+      CLOUDFLARE_PAGES_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
 
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
         env:
          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: |
-          npm install
+          npm ci
           npm start
 
       - name: Commit updated content
@@ -53,6 +53,6 @@ jobs:
         with:
           commit_message: Sync content with Notion
 
-      # - name: Trigger Cloudflare Pages build
-      #   if: startsWith(env.CLOUDFLARE_PAGES_DEPLOY_HOOK, 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/') && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-      #   run: curl -X POST ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+      - name: Trigger Cloudflare Pages build
+        if: startsWith(env.CLOUDFLARE_PAGES_DEPLOY_HOOK, 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/') && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        run: curl -X POST ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}

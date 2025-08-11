@@ -3,7 +3,7 @@ import { UserConfig } from "./src/config"
 const userConfig: UserConfig = {
     base_url: "https://blog.namuori.net",
     mount: {
-        manual: false,
+        manual: true,
         page_url: 'https://namuori00.notion.site/218dcd44779f80a0b5fcc7cffbc88959',
         pages: [
             // {
@@ -22,7 +22,7 @@ const userConfig: UserConfig = {
             // }
             {
                 database_id: '218dcd44779f81ddbf93e4fadbccbfde',
-                target_folder: '.'
+                target_folder: 'post'
             }
         ],
     }
