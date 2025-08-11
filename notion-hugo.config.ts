@@ -22,7 +22,7 @@ const userConfig: UserConfig = {
             // }
             {
                 database_id: '218dcd44779f81ddbf93e4fadbccbfde',
-                target_folder: 'posts'
+                target_folder: 'post'
             }
         ],
     }
