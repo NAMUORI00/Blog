@@ -24,4 +24,4 @@ The original theme is licensed under the MIT License. Copyright (c) 2019 MeiK233
 -   **GitHub:** [NAMUORI00](https://github.com/NAMUORI00)
 -   **개인 웹사이트:** [https://namuori.net](https://namuori.net)
 
-방문해주셔서 감사합니다! 
+방문해주셔서 감사합니다!
