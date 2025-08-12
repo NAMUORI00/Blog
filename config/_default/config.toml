@@ -50,6 +50,10 @@ pygmentsUseClasses = true
 
 # Hugo Mounts Configuration
 [[module.mounts]]
+source = "content"
+target = "content"
+
+[[module.mounts]]
 source = "content/About-218dcd44779f81169bcedf9476baf73b.md"
 target = "content/readme.md"
 
