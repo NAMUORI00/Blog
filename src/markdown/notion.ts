@@ -3,8 +3,8 @@ import type {
   GetBlockResponse,
   ListBlockChildrenResponse,
   PageObjectResponse,
+  RichTextItemResponse,
 } from "@notionhq/client";
-import { plainText } from "./md";
 
 export const getBlockChildren = async (
   notionClient: Client,
@@ -75,3 +75,7 @@ export const getPageRelrefFromId = async (
   const relref = `{{% relref "${fileName}" %}}`;
   return { title, relref };
 };
+
+export function plainText(textArray: RichTextItemResponse[]): string {
+  return textArray.map((text) => text.plain_text).join("");
+}
