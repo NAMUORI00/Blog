@@ -3,7 +3,6 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 interface Env {
   KV: KVNamespace;
   NOTION_TOKEN?: string;
-  CF_PAGES_URL: string;
 }
 
 type CacheEntry = {

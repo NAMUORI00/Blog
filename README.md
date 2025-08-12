@@ -24,4 +24,12 @@ The original theme is licensed under the MIT License. Copyright (c) 2019 MeiK233
 -   **GitHub:** [NAMUORI00](https://github.com/NAMUORI00)
 -   **개인 웹사이트:** [https://namuori.net](https://namuori.net)
 
+## 환경 변수
+
+-   `NOTION_TOKEN`: Notion API에 접근하기 위한 토큰입니다.
+    Cloudflare Pages Functions에서 이 값이 설정되지 않으면 컨텐츠를
+    불러올 수 없습니다.
+-   `CF_PAGES_URL`: Cloudflare에서 제공되는 기본 URL 값으로,
+    현재 프로젝트에서는 사용하지 않습니다.
+
 방문해주셔서 감사합니다!
