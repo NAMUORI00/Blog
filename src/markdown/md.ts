@@ -3,7 +3,6 @@ import type {
   EquationRichTextItemResponse,
   MentionRichTextItemResponse,
   RichTextItemResponse,
-  TextRichTextItemResponse,
   BlockObjectResponse,
 } from "@notionhq/client";
 import { Client } from "@notionhq/client";
@@ -13,6 +12,8 @@ import { getPageRelrefFromId } from "./notion";
 type AudioBlockObjectResponse = Extract<BlockObjectResponse, { type: "audio" }>;
 type PdfBlockObjectResponse = Extract<BlockObjectResponse, { type: "pdf" }>;
 type VideoBlockObjectResponse = Extract<BlockObjectResponse, { type: "video" }>;
+
+type TextRichText = Extract<RichTextItemResponse, { type: "text" }>;
 export const inlineCode = (text: string) => {
   return `\`${text}\``;
 };
@@ -128,7 +129,7 @@ export const equation = (expression: string) => {
   return `\\[${expression}\\]`;
 };
 
-function textRichText(text: TextRichTextItemResponse): string {
+function textRichText(text: TextRichText): string {
   const annotations = text.annotations;
   let content = text.text.content;
   if (annotations.bold) {
