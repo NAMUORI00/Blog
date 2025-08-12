@@ -1,8 +1,8 @@
 import { Client, isFullBlock } from "@notionhq/client";
-import {
+import type {
   GetBlockResponse,
   RichTextItemResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+} from "@notionhq/client";
 import { CustomTransformer, MdBlock, NotionToMarkdownOptions } from "./types";
 import * as md from "./md";
 import { getBlockChildren, getPageRelrefFromId } from "./notion";

@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import { Client, isFullUser, iteratePaginatedAPI } from "@notionhq/client";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { PageObjectResponse } from "@notionhq/client";
 import { NotionToMarkdown } from "./markdown/notion-to-md";
 import YAML from "yaml";
 import { sh } from "./sh";

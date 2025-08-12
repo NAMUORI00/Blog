@@ -1,5 +1,5 @@
 import { Client, isFullBlock, isFullPage } from "@notionhq/client";
-import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { BlockObjectResponse } from "@notionhq/client";
 interface Env {
   KV: KVNamespace;
   NOTION_TOKEN?: string;
