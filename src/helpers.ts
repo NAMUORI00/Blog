@@ -1,5 +1,5 @@
 import { Client, isFullPage } from "@notionhq/client";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { PageObjectResponse } from "@notionhq/client";
 
 export function getPageTitle(page: PageObjectResponse): string {
   const title = page.properties.Name ?? page.properties.title;

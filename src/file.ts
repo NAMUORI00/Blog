@@ -1,4 +1,4 @@
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { PageObjectResponse } from "@notionhq/client";
 import fs from "fs";
 import path from "path";
 import fm from "front-matter";

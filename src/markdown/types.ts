@@ -1,4 +1,4 @@
-import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { GetBlockResponse } from "@notionhq/client";
 import { Client } from "@notionhq/client";
 
 export interface NotionToMarkdownOptions {

@@ -1,9 +1,9 @@
 import { Client, isFullPage } from "@notionhq/client";
-import {
+import type {
   GetBlockResponse,
   ListBlockChildrenResponse,
   PageObjectResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+} from "@notionhq/client";
 import { plainText } from "./md";
 
 export const getBlockChildren = async (

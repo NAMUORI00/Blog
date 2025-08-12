@@ -1,16 +1,18 @@
 import { markdownTable } from "markdown-table";
-import {
-  AudioBlockObjectResponse,
+import type {
   EquationRichTextItemResponse,
   MentionRichTextItemResponse,
-  PdfBlockObjectResponse,
   RichTextItemResponse,
   TextRichTextItemResponse,
-  VideoBlockObjectResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+  BlockObjectResponse,
+} from "@notionhq/client";
+import { Client } from "@notionhq/client";
 import { CalloutIcon } from "./types";
 import { getPageRelrefFromId } from "./notion";
-import { Client } from "@notionhq/client";
+
+type AudioBlockObjectResponse = Extract<BlockObjectResponse, { type: "audio" }>;
+type PdfBlockObjectResponse = Extract<BlockObjectResponse, { type: "pdf" }>;
+type VideoBlockObjectResponse = Extract<BlockObjectResponse, { type: "video" }>;
 export const inlineCode = (text: string) => {
   return `\`${text}\``;
 };
