@@ -16,7 +16,7 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "server": "hugo server -D --disableFastRender --noHTTPCache",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit --skipLibCheck -p functions/tsconfig.json",
     "build": "tsc",
     "format": "prettier --write src/**/*.ts"
   },
@@ -44,3 +44,4 @@
     "typescript": "^5.8.3"
   }
 }
+
