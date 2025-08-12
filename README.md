@@ -18,6 +18,15 @@
 
 The original theme is licensed under the MIT License. Copyright (c) 2019 MeiK2333. We maintain this attribution as required by the license terms.
 
+## 환경 변수
+
+Gitalk 댓글 기능은 GitHub OAuth 앱 자격 증명을 필요로 합니다. Hugo는 다음 환경 변수에서 값을 읽어옵니다:
+
+- `HUGO_PARAMS_GITALK_CLIENTID` – GitHub OAuth App Client ID
+- `HUGO_PARAMS_GITALK_CLIENTSECRET` – GitHub OAuth App Client Secret
+
+로컬 개발 시 이 변수들을 `.env` 파일이나 셸에 설정하세요. `.env`는 `.gitignore`에 추가되어 있으므로 민감한 값이 저장소에 커밋되지 않습니다.
+
 ### 관련 링크
 
 -   **블로그:** [https://namuori00.github.io](https://namuori00.github.io)

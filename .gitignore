@@ -1,7 +1,7 @@
 node_modules
 dist
 .env
+.env.*
 resources
 .hugo_build.lock
 public
-.claude
