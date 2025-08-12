@@ -22,9 +22,9 @@ export type CalloutIcon =
   | { type: "emoji"; emoji: string }
   | { type: "external"; external: { url: string } }
   | { type: "file"; file: { url: string; expiry_time: string } }
-  | { type: "custom_emoji"; custom_emoji: CustomEmojiResponse; }
+  | { type: "custom_emoji"; custom_emoji: CustomEmojiResponse }
   | null;
 
 export type CustomTransformer = (
-  block: GetBlockResponse
+  block: GetBlockResponse,
 ) => string | Promise<string>;
