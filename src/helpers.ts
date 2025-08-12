@@ -25,10 +25,10 @@ export async function getCoverLink(
 }
 
 export function getFileName(title: string, page_id: string): string {
-  return (
-    title.replaceAll(" ", "-").replace(/--+/g, "-") +
-    "-" +
-    page_id.replaceAll("-", "") +
-    ".md"
-  );
+  const sanitizedTitle = title
+    .replace(/[\\/:*?"'<>|`]/g, "")
+    .replaceAll(" ", "-")
+    .replace(/--+/g, "-");
+  const sanitizedId = page_id.replaceAll("-", "");
+  return `${sanitizedTitle}-${sanitizedId}.md`;
 }

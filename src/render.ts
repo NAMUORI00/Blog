@@ -3,11 +3,11 @@ import { Client, isFullUser, iteratePaginatedAPI } from "@notionhq/client";
 import type { PageObjectResponse } from "@notionhq/client";
 import { NotionToMarkdown } from "./markdown/notion-to-md";
 import YAML from "yaml";
-import { sh } from "./sh";
 import { DatabaseMount, PageMount } from "./config";
 import { getPageTitle, getCoverLink, getFileName } from "./helpers";
 import path from "path";
 import { getContentFile } from "./file";
+import { spawn } from "child_process";
 
 export async function renderPage(page: PageObjectResponse, notion: Client) {
   // load formatter config
@@ -156,11 +156,11 @@ export async function savePage(
   notion: Client,
   mount: DatabaseMount | PageMount,
 ) {
-  const postpath = path.join(
-    "content",
-    mount.target_folder,
+  const targetFolder = sanitizeFolder(mount.target_folder);
+  const initialFileName = sanitizeFileName(
     getFileName(getPageTitle(page), page.id),
   );
+  const postpath = path.join("content", targetFolder, initialFileName);
   const post = getContentFile(postpath);
   if (post && post.metadata.last_edited_time === page.last_edited_time) {
     console.info(`[Info] The post ${postpath} is up-to-date, skipped.`);
@@ -170,7 +170,34 @@ export async function savePage(
   console.info(`[Info] Updating ${postpath}`);
 
   const { title, pageString } = await renderPage(page, notion);
-  const fileName = getFileName(title, page.id);
-  await sh(`hugo new "${mount.target_folder}/${fileName}"`, false);
-  fs.writeFileSync(`content/${mount.target_folder}/${fileName}`, pageString);
+  const fileName = sanitizeFileName(getFileName(title, page.id));
+
+  await runHugoNew(`${targetFolder}/${fileName}`);
+  fs.writeFileSync(`content/${targetFolder}/${fileName}`, pageString);
+}
+
+function runHugoNew(target: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const proc = spawn("hugo", ["new", target]);
+    proc.on("error", reject);
+    proc.on("close", (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`hugo exited with code ${code}`));
+      }
+    });
+  });
+}
+
+function sanitizeFolder(folder: string): string {
+  const normalized = path.posix.normalize(folder);
+  if (path.posix.isAbsolute(normalized) || normalized.startsWith("..")) {
+    throw new Error(`Invalid target folder: ${folder}`);
+  }
+  return normalized.replace(/["'`]/g, "");
+}
+
+function sanitizeFileName(name: string): string {
+  return path.posix.basename(name).replace(/["'`]/g, "");
 }
