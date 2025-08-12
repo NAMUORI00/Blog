@@ -2,11 +2,233 @@ import { Client, isFullBlock } from "@notionhq/client";
 import type {
   GetBlockResponse,
   RichTextItemResponse,
+  EquationRichTextItemResponse,
+  MentionRichTextItemResponse,
+  BlockObjectResponse,
 } from "@notionhq/client";
-import { CustomTransformer, MdBlock, NotionToMarkdownOptions } from "./types";
-import * as md from "./md";
-import { getBlockChildren, getPageRelrefFromId } from "./notion";
-import { plainText } from "./md";
+import {
+  CustomTransformer,
+  MdBlock,
+  NotionToMarkdownOptions,
+  CalloutIcon,
+} from "./types";
+import {
+  getBlockChildren,
+  getPageRelrefFromId,
+  plainText,
+} from "./notion";
+
+type AudioBlockObjectResponse = Extract<
+  BlockObjectResponse,
+  { type: "audio" }
+>;
+type PdfBlockObjectResponse = Extract<
+  BlockObjectResponse,
+  { type: "pdf" }
+>;
+type VideoBlockObjectResponse = Extract<
+  BlockObjectResponse,
+  { type: "video" }
+>;
+type TextRichText = Extract<RichTextItemResponse, { type: "text" }>;
+
+const inlineCode = (text: string) => `\`${text}\``;
+const bold = (text: string) => `**${text}**`;
+const italic = (text: string) => `_${text}_`;
+const strikethrough = (text: string) => `~~${text}~~`;
+const underline = (text: string) => `<u>${text}</u>`;
+const link = (text: string, href: string) => `[${text}](${href})`;
+const codeBlock = (text: string, language?: string) => {
+  if (language === "plain text") language = "text";
+  return `\`\`\`${language}\n${text}\n\`\`\``;
+};
+const heading1 = (text: string) => `# ${text}`;
+const heading2 = (text: string) => `## ${text}`;
+const heading3 = (text: string) => `### ${text}`;
+const quote = (text: string) => `> ${text.replace(/\n/g, "  \n> ")}`;
+const callout = (text: string, icon?: CalloutIcon) => {
+  let emoji: string | undefined;
+  if (icon?.type === "emoji") {
+    emoji = icon.emoji;
+  }
+  return `> ${emoji ? emoji + " " : ""}${text.replace(/\n/g, "  \n> ")}`;
+};
+const bullet = (text: string, count?: number) => {
+  const renderText = text.trim();
+  return count ? `${count}. ${renderText}` : `- ${renderText}`;
+};
+const todo = (text: string, checked: boolean) =>
+  checked ? `- [x] ${text}` : `- [ ] ${text}`;
+const image = (alt: string, href: string) => `![${alt}](${href})`;
+const addTabSpace = (text: string, n = 0) => {
+  const tab = " ";
+  for (let i = 0; i < n; i++) {
+    if (text.includes("\n")) {
+      const multiLineText = text.split(/(?<=\n)/).join(tab);
+      text = tab + multiLineText;
+    } else {
+      text = tab + text;
+    }
+  }
+  return text;
+};
+const divider = () => "---";
+const toggle = (summary?: string, children?: string) => {
+  if (!summary) return children || "";
+  return `<details>\n  <summary>${summary}</summary>\n\n${children || ""}\n\n  </details>`;
+};
+const table = (cells: string[][]): string => {
+  if (cells.length === 0) return "";
+  const header = cells[0];
+  const rows = [
+    `| ${header.join(" | ")} |`,
+    `| ${header.map(() => "---").join(" | ")} |`,
+  ];
+  for (let i = 1; i < cells.length; i++) {
+    rows.push(`| ${cells[i].join(" | ")} |`);
+  }
+  return rows.join("\n");
+};
+const equation = (expression: string) => `\\[${expression}\\]`;
+function textRichText(text: TextRichText): string {
+  const annotations = text.annotations;
+  let content = text.text.content;
+  if (annotations.bold) {
+    content = bold(content);
+  }
+  if (annotations.code) {
+    content = inlineCode(content);
+  }
+  if (annotations.italic) {
+    content = italic(content);
+  }
+  if (annotations.strikethrough) {
+    content = strikethrough(content);
+  }
+  if (annotations.underline) {
+    content = underline(content);
+  }
+  if (text.href) {
+    content = link(content, text.href);
+  }
+  return content;
+}
+function equationRichText(text: EquationRichTextItemResponse): string {
+  return `\\(${text.equation.expression}\\)`;
+}
+async function mentionRichText(
+  text: MentionRichTextItemResponse,
+  notion: Client
+): Promise<string> {
+  const mention = text.mention;
+  switch (mention.type) {
+    case "page": {
+      const pageId = mention.page.id;
+      const { title, relref } = await getPageRelrefFromId(pageId, notion);
+      return link(title, relref);
+    }
+    case "user": {
+      const userId = mention.user.id;
+      try {
+        const user = await notion.users.retrieve({ user_id: userId });
+        if (user.name) {
+          return `@${user.name}`;
+        }
+      } catch (error) {
+        console.warn(`Failed to retrieve user with id ${userId}`);
+      }
+      return "";
+    }
+    case "date": {
+      const date = mention.date;
+      const dateEnd = date.end ? ` -> ${date.end}` : "";
+      const timeZone = date.time_zone ? ` (${date.time_zone})` : "";
+      return `@${date.start}${dateEnd}${timeZone}`;
+    }
+    case "link_preview": {
+      const linkPreview = mention.link_preview;
+      return link(linkPreview.url, linkPreview.url);
+    }
+    case "template_mention": {
+      return "";
+    }
+    case "database": {
+      console.warn("[Warn] Database mention is not supported");
+      return "";
+    }
+  }
+  return "";
+}
+async function richText(
+  textArray: RichTextItemResponse[],
+  notion: Client
+): Promise<string> {
+  return (
+    await Promise.all(
+      textArray.map(async (text) => {
+        if (text.type === "text") {
+          return textRichText(text);
+        } else if (text.type === "equation") {
+          return equationRichText(text);
+        } else if (text.type === "mention") {
+          return await mentionRichText(text, notion);
+        }
+      })
+    )
+  ).join("");
+}
+function htmlVideo(url: string) {
+  return `<video controls style="height:auto;width:100%;">\n  <source src="${url}">\n  <p>\n    Your browser does not support HTML5 video. Here is a\n    <a href="${url}" download="${url}">link to the video</a> instead.\n  </p>\n</video>`;
+}
+const video = (block: VideoBlockObjectResponse) => {
+  const videoBlock = block.video;
+  if (videoBlock.type === "file") {
+    return htmlVideo(blockIdToApiUrl(block.id));
+  }
+  const url = videoBlock.external.url;
+  if (url.startsWith("https://www.youtube.com/")) {
+    const videoId = url.slice(-11);
+    return `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  }
+  return htmlVideo(url);
+};
+const pdf = (block: PdfBlockObjectResponse) => {
+  const pdfBlock = block.pdf;
+  const url =
+    pdfBlock.type === "file"
+      ? blockIdToApiUrl(block.id)
+      : pdfBlock.external.url;
+  return `<embed src="${url}" type="application/pdf" style="width: 100%;aspect-ratio: 2/3;height: auto;" />`;
+};
+const audio = (block: AudioBlockObjectResponse) => {
+  const audioBlock = block.audio;
+  const url =
+    audioBlock.type === "file"
+      ? blockIdToApiUrl(block.id)
+      : audioBlock.external.url;
+  return `<audio controls src="${url}"></audio>`;
+};
+const md = {
+  addTabSpace,
+  image,
+  divider,
+  equation,
+  video,
+  pdf,
+  link,
+  table,
+  toggle,
+  heading1,
+  heading2,
+  heading3,
+  bullet,
+  todo,
+  codeBlock,
+  callout,
+  quote,
+  audio,
+  richText,
+};
 
 /**
  * Converts a Notion page to Markdown.

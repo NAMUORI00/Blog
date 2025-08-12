@@ -32,7 +32,6 @@
     "dotenv": "^16.5.0",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.3.0",
-    "markdown-table": "^3.0.4",
     "tsx": "^4.19.4",
     "yaml": "^2.8.0"
   },
