@@ -10,8 +10,9 @@ import { getFileName, getPageTitle } from "./helpers";
 dotenv.config();
 
 async function main() {
-  if (process.env.NOTION_TOKEN === "")
-    throw Error("The NOTION_TOKEN environment vairable is not set.");
+  // NOTION_TOKEN is required to authenticate with Notion's API
+  if (!process.env.NOTION_TOKEN)
+    throw Error("The NOTION_TOKEN environment variable is not set.");
   const config = await loadConfig();
   console.info("[Info] Config loaded ");
 
