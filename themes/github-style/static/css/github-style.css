@@ -92,7 +92,7 @@ body {
 }
 
 ::placeholder {
-  color: #c2c3c4;
+  color: var(--color-text-placeholder);
   opacity: 1;
 }
 
