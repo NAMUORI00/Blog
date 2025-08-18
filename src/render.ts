@@ -118,6 +118,22 @@ export async function renderPage(page: PageObjectResponse, notion: Client) {
     }
   }
 
+  // unify summary/description fields
+  for (const key of Object.keys(frontMatter)) {
+    const lower = key.toLowerCase();
+    if (
+      (lower === "summary" || lower === "description") &&
+      typeof frontMatter[key] === "string"
+    ) {
+      const value = frontMatter[key] as string;
+      frontMatter.summary = value;
+      frontMatter.description = value;
+      if (key !== "summary" && key !== "description") {
+        delete frontMatter[key];
+      }
+    }
+  }
+
   // set default author
   if (frontMatter.authors == null) {
     try {
