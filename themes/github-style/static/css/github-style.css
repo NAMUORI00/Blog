@@ -211,3 +211,11 @@ body {
   margin-top: 0;
   margin-bottom: 1.2em;
 }
+
+[data-color-mode="dark"] .markdown-body table {
+  background-color: var(--color-bg-primary);
+}
+
+[data-color-mode="dark"] .markdown-body table tr:nth-child(2n) {
+  background-color: var(--color-bg-tertiary);
+}
