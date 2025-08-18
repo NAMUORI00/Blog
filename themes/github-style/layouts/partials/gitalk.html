@@ -43,7 +43,16 @@
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 <script>
   const rawGitalkId = '{{ .Site.Params.Gitalk.id | default "window.location.pathname" }}';
-  const gitalkId = rawGitalkId === "window.location.pathname" || rawGitalkId === "location.pathname" ? window.location.pathname : rawGitalkId;
+  function shortHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash).toString(36);
+  }
+  const defaultId = rawGitalkId === "window.location.pathname" || rawGitalkId === "location.pathname" ? window.location.pathname : rawGitalkId;
+  const gitalkId = defaultId.length > 50 ? shortHash(defaultId) : defaultId;
   const gitalk = new Gitalk({
     clientID: '{{ .Site.Params.Gitalk.clientID }}',
     clientSecret: '{{ .Site.Params.Gitalk.clientSecret }}',
