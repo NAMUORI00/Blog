@@ -494,7 +494,7 @@
   --color-bg-table-of-contents-container: rgb(28, 33, 40);
   --color-bg-table-of-contents-option-selected: rgb(31, 111, 235);
   --color-fg-table-of-contents-option-selected: var(--color-text-primary);
-  --color-bg-tertiary: #161b22;
+  --color-bg-tertiary: #0d1117;
   --color-bg-warning: rgba(187, 128, 9, 0.1);
   --color-bg-warning-inverse: #bb8009;
   --color-blankslate-icon: #535c66;
@@ -703,7 +703,7 @@
   --color-label-warning-text: #e3b341;
   --color-logo-subdued: #30363d;
   --color-markdown-blockquote-border: #3b434b;
-  --color-markdown-code-bg: rgba(240, 246, 252, 0.2);
+  --color-markdown-code-bg: #0d1117;
   --color-markdown-frame-border: #3b434b;
   --color-markdown-table-border: #3b434b;
   --color-markdown-table-tr-border: #272c32;
@@ -855,4 +855,10 @@
   --color-workflow-card-header-shadow: transparent;
   --color-workflow-card-progress-complete-bg: #8b949e;
   --color-workflow-card-progress-incomplete-bg: #30363d;
+}
+
+[data-color-mode="dark"] pre,
+[data-color-mode="dark"] pre code {
+  background-color: var(--color-bg-tertiary);
+  color: #c9d1d9;
 }
