@@ -32,6 +32,7 @@ pygmentsUseClasses = true
     pagerDirection = "last"  # 댓글 정렬 방향
     createIssueManually = true  # 관리자가 수동으로 이슈 생성
     distractionFreeMode = false  # 집중 모드 비활성화
+    proxy = "https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"
 
   [[params.links]]
     title = "Email"
