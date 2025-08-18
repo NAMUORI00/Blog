@@ -189,3 +189,25 @@ body {
 .pinned-item-desc img {
   max-width: 100%;
 }
+
+/* Adjust typography for dark mode */
+[data-color-mode="dark"] body {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+[data-color-mode="dark"] h1,
+[data-color-mode="dark"] h2,
+[data-color-mode="dark"] h3,
+[data-color-mode="dark"] h4,
+[data-color-mode="dark"] h5,
+[data-color-mode="dark"] h6 {
+  line-height: 1.3;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
+}
+
+[data-color-mode="dark"] p {
+  margin-top: 0;
+  margin-bottom: 1.2em;
+}
