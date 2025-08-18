@@ -2,6 +2,7 @@ baseURL = "https://blog.namuori.net"
 languageCode = "en-us"
 title = "나무오리"
 theme = "github-style"
+summaryLength = 30
 
 pygmentsCodeFences = true
 pygmentsUseClasses = true
