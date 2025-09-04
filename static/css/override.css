@@ -1,0 +1,92 @@
+/* Unify typography across light/dark for parity */
+[data-color-mode="light"] body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+[data-color-mode="light"] h1,
+[data-color-mode="light"] h2,
+[data-color-mode="light"] h3,
+[data-color-mode="light"] h4,
+[data-color-mode="light"] h5,
+[data-color-mode="light"] h6 {
+  line-height: 1.3;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
+  color: var(--color-text-primary);
+}
+
+[data-color-mode="light"] p {
+  margin-top: 0;
+  margin-bottom: 1.2em;
+}
+
+/* Dark mode table polish */
+[data-color-mode="dark"] .markdown-body table {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-border-default);
+}
+
+[data-color-mode="dark"] .markdown-body thead {
+  background-color: var(--color-bg-secondary);
+}
+
+[data-color-mode="dark"] .markdown-body th,
+[data-color-mode="dark"] .markdown-body td {
+  border-color: var(--color-border-default);
+}
+
+[data-color-mode="dark"] .markdown-body tr:nth-child(2n) {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-color-mode="dark"] .markdown-body tr:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Code block + Chroma line number tables in dark mode */
+[data-color-mode="dark"] .chroma {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-color-mode="dark"] .chroma .lntable {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-muted);
+}
+
+[data-color-mode="dark"] .chroma .lntd {
+  background-color: transparent;
+  border-color: var(--color-border-muted);
+}
+
+[data-color-mode="dark"] .chroma .ln {
+  color: var(--color-fg-muted);
+}
+
+/* Highlighted lines */
+[data-color-mode="dark"] .chroma .hl {
+  background-color: rgba(56, 139, 253, 0.15);
+}
+
+[data-color-mode="light"] .chroma .hl {
+  background-color: rgba(3, 102, 214, 0.08);
+}
+
+/* Ensure pre elements use theme variables consistently */
+[data-color-mode="light"] pre {
+  background-color: var(--color-markdown-code-bg);
+}
+
+[data-color-mode="dark"] pre,
+[data-color-mode="dark"] pre code {
+  background-color: var(--color-bg-tertiary);
+  color: #c9d1d9;
+}
+
+[data-color-mode="dark"] pre code {
+  background-color: transparent;
+  color: inherit;
+}
+

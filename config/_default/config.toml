@@ -12,6 +12,9 @@ pygmentsUseClasses = true
   author = "Kim Yu Seok"
   github = "NAMUORI00"
   Description = "I love github fork"
+  
+  # Custom CSS overrides (loaded by head partial)
+  custom_css = ["/css/override.css"]
 
   headerIcon = "/images/github-mark.svg"
   avatar = "https://avatars.githubusercontent.com/u/46620366"
